@@ -1,6 +1,6 @@
 # Jepong Links
 
-Short redirect links on **jepong-devxyz.com**. Visit `jepong-devxyz.com/<code>`
+Short redirect links on **go.jepong-devxyz.com**. Visit `go.jepong-devxyz.com/<code>`
 and get sent straight to the target URL with an instant 302 redirect —
 the address bar shows the real target after loading.
 
@@ -33,12 +33,15 @@ the address bar shows the real target after loading.
    - `GITHUB_REPO` = `JepongDevxyz/JepongDevxyz-Links`
    - `ADMIN_PASSWORD` = the password you want for `/admin`
 6. **Redeploy** (env vars only apply to new deployments).
-7. Project **Settings → Domains → Add** `jepong-devxyz.com`. Vercel shows the
-   DNS record to add — add that record in the Northwest DNS panel.
+7. In Vercel: project **Settings → Domains → Add** `go.jepong-devxyz.com`.
+   (The `jepong-devxyz.com` apex is left untouched — it serves an existing
+   WordPress page, so the shortener lives on the `go` subdomain.) Vercel shows
+   the DNS record to add — add it in the Northwest DNS panel as a
+   **CNAME** record: Host `go` → `cname.vercel-dns.com`.
 
 ## Using it
 
-- Open `jepong-devxyz.com/admin`, enter the admin password.
+- Open `go.jepong-devxyz.com/admin`, enter the admin password.
 - Create: paste the target URL, optionally pick a custom code
   (3–64 chars: letters, numbers, `-`, `_`; blank = random 12-char code).
 - Every created link is a commit in `links.json`, so there is a full history.
