@@ -41,12 +41,28 @@ the address bar shows the real target after loading.
 
 ## Using it
 
-- Open `go.jepong-devxyz.com/admin`, enter the admin password.
-- Create: paste the target URL, optionally pick a custom code
-  (3–64 chars: letters, numbers, `-`, `_`; blank = random 12-char code).
+**Public (anyone):** open `go.jepong-devxyz.com`, paste the target URL,
+optionally pick a custom code (3–64 chars: letters, numbers, `-`, `_`;
+blank = random 12-char code). No password needed.
+
+**Admin (owner only):** `go.jepong-devxyz.com/admin` + password —
+list every link and delete any of them.
+
 - Every created link is a commit in `links.json`, so there is a full history.
 - New links work immediately — every redirect does one GitHub API read,
   well within the 5,000/hour token limit for personal use.
+
+## Abuse controls
+
+The public create endpoint (`POST /api/create`) is open to the internet:
+
+- Per-IP rate limit: 10 creates/hour (best-effort, in-memory — Vercel
+  serverless instances recycle, so it slows casual abuse, not a determined
+  attacker with many IPs).
+- Same code/URL validation as the admin API; reserved codes blocked.
+- Listing and deleting stay behind the admin password.
+- For stronger protection, put a CAPTCHA (e.g. Cloudflare Turnstile) in
+  front of the public form and verify it in `api/create.js`.
 
 ## Security notes
 
